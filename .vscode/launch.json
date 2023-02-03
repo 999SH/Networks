@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch TCPAsk",
+            "request": "launch",
+            "mainClass": "TCPAsk",
+            "projectName": "Networks_3396bbeb"
+        },
+        {
+            "type": "java",
+            "name": "Launch with Arguments Prompt",
+            "request": "launch",
+            "mainClass": "",
+            "args": "${command:SpecifyProgramArgs}"
+        }
+    ]
+}
