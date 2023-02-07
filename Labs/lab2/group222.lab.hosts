@@ -1,0 +1,21 @@
+$ttl 3600
+group222.lab.	IN	SOA	ns.group222.lab. root.group222.lab. (
+			1675779269
+			3600
+			600
+			1209600
+			3600 )
+group222.lab.	IN	NS	ns.group222.lab.
+ns.group222.lab.	IN	A	10.222.1.2
+gw-server.group222.lab.	IN	A	10.222.1.1
+www.group222.lab.	IN	A	10.222.1.222
+r1.group222.lab.	IN	A	10.222.2.1
+r2.group222.lab.	IN	A	10.222.2.2
+gw-client.group222.lab.	IN	A	10.222.3.1
+client1.group222.lab.	IN	A	10.222.3.11
+client2.group222.lab.	IN	A	10.222.3.12
+client3.group222.lab.	IN	A	10.222.3.13
+dhcpd.group222.lab.	IN	CNAME	ns.group222.lab.
+mail.group222.lab.	IN	CNAME	www.group222.lab.
+group222.lab.	IN	MX	10 mail.group222.lab.
+

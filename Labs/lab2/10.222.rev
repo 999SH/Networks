@@ -1,0 +1,17 @@
+$ttl 3600
+222.10.in-addr.arpa.	IN	SOA	ns.group222.lab. root.group222.lab. (
+			1675779835
+			3600
+			600
+			1209600
+			3600 )
+222.10.in-addr.arpa.	IN	NS	ns.group222.lab.
+1.1.222.10.in-addr.arpa.	IN	PTR	gw-server.group222.lab.
+2.1.222.10.in-addr.arpa.	IN	PTR	ns.group222.lab.
+222.1.222.10.in-addr.arpa.	IN	PTR	www.group222.lab.
+1.2.222.10.in-addr.arpa.	IN	PTR	r1.group222.lab.
+2.2.222.10.in-addr.arpa.	IN	PTR	r2.group222.lab.
+1.3.222.10.in-addr.arpa.	IN	PTR	gw-client.group222.lab.
+11.3.222.10.in-addr.arpa.	IN	PTR	client1.group222.lab.
+12.3.222.10.in-addr.arpa.	IN	PTR	client2.group222.lab.
+13.3.222.10.in-addr.arpa.	IN	PTR	client3.group222.lab.
