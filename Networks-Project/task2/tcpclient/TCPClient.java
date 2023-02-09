@@ -33,7 +33,7 @@ public class TCPClient {
             OutputStream outputStream = socket.getOutputStream();               //Creates the outputstream used to write data to a socket
             outputStream.write(toServerBytes);                                  //Output toserverbytes array to server socket bytearray
             if (shutdown == true){
-                socket.shutdownOutput();
+                socket.shutdownOutput();          //Close outputstream if shutdown true 
             }
 
             InputStream inputStream = socket.getInputStream();                  //Initalize the inputstream used to read the response from the server
@@ -41,14 +41,18 @@ public class TCPClient {
             byte[] fixedfromServerBuffer = new byte[BUFFERSIZE];                //Initial fixed in-memory buffer
             int length;                                                         //Changes each iteration of the while loop, represents the number of bytes read in the buffer
             int totalLength = 0;
+            int l = limit;   //Cast Integer to int
+            
             socket.setSoTimeout(timeout);                                       //Set timeout and try to read if not null, if 0 is set it removes the timeout limit. 
-    
             try {
-                while (((length = inputStream.read(fixedfromServerBuffer)) != -1)&&(totalLength <= limit)) { 
-                bytearrayout.write(fixedfromServerBuffer, 0, length);
+            while (((length = inputStream.read(fixedfromServerBuffer)) != -1) && (totalLength <= l)){
+                int i = 0;
+                while (totalLength + i + 1 <= l && i + 1 <= length){
+                    bytearrayout.write(fixedfromServerBuffer, i, 1);
+                    i++;
+                }      
                 totalLength += length;                                                                   
             }
-
             return bytearrayout.toByteArray(); 
             } catch(SocketException error) {
                 System.err.println("Socket timeout reached" +error.getMessage());

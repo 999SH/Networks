@@ -8,8 +8,8 @@
             "type": "java",
             "name": "Launch with Arguments Prompt",
             "request": "launch",
-            "mainClass": "TCPask",
-            "args": "$ false, 300, 300, time.nist.gov 13 "
+            "mainClass": "TCPAsk",
+            "args": "--shutdown --timeout 300 --limit 30 java.lab.ssvl.kth.se 19"
         },
         {
             "type": "java",
