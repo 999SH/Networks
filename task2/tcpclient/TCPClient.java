@@ -47,21 +47,27 @@ public class TCPClient {
             try {
             while (((length = inputStream.read(fixedfromServerBuffer)) != -1) && (totalLength <= l)){
                 int i = 0;
+                if (l > totalLength+length){
+                bytearrayout.write(fixedfromServerBuffer, 0, length);
+                } else {
                 while (totalLength + i + 1 <= l && i + 1 <= length){
                     bytearrayout.write(fixedfromServerBuffer, i, 1);
                     i++;
+                }
                 }      
                 totalLength += length;                                                                   
             }
             return bytearrayout.toByteArray(); 
+
             } catch(SocketException error) {
-                System.err.println("Socket timeout reached" +error.getMessage());
-                throw error;
+                //System.err.println("Socket timeout reached: " +error.getMessage());
+                return bytearrayout.toByteArray();
+
 
             } catch(IOException error) {
-                System.err.println("IO error" + error.getMessage());
-                throw error;
-                
+                //System.err.println("IO error: " + error.getMessage());
+                return bytearrayout.toByteArray();
+
             }finally { 
                 socket.close();  //Ensure socket is always closed
             }
