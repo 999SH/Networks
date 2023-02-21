@@ -1,32 +1,25 @@
 import java.net.*;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-
-import tcpclient.TCPClient;
-
 import java.io.*;
+import java.util.*;
+import tcpclient.TCPClient;
+import java.nio.charset.StandardCharsets;
 
-public class HTTPAsk {
-    public static void main( String[] args) throws IOException {
-        
-        //Initializing all the variables
-        String hostname = "";
-        String portNumber = "";  //Has to be a string because of the later methods
-        String stringToSend = "";
-        boolean shutdown = false;
-        Integer timeout = null;
-        Integer limit = null;
-        boolean online = true;
-        int port = Integer.parseInt(args[0]);
-        ServerSocket serverSocket = new ServerSocket(port);
-
-        StringBuilder urlbuilder = new StringBuilder();
-        int input;
-
-        while(online){
-            
+public class MyRunnable implements Runnable {
+    public Socket client;
+    public MyRunnable(Socket socket){
+        client = socket;
+    }
+    public void run(){
+        try{
+            StringBuilder urlbuilder = new StringBuilder();
+            int input;
+             String hostname = "";
+            String portNumber = "";  //Has to be a string because of the later methods
+            String stringToSend = "";
+            boolean shutdown = false;
+            Integer timeout = null;
+            Integer limit = null;
             //System.out.println("Waiting for socket"); //Initialize streams
-            Socket client = serverSocket.accept();
             //System.out.println("Socket accpeted");
             InputStream inputStream = client.getInputStream();
             OutputStream outputStream = client.getOutputStream();
@@ -41,9 +34,6 @@ public class HTTPAsk {
                     urlbuilder.append((char)input);
                 }
                 String url = urlbuilder.toString();
-                //String url = "GET /ask?hostname=java.lab.ssvl.kth.se&string=HelloServer&port=7 HTTP/1.1";
-                //String url = "GET /ask?hostname=localhost&port=10002&string=The22 HTTP/1.1";
-                //String url = "GET /ask?hostname=whois.iis.se&string=kth.se&port=43 HTTP/1.1";
                 String[] requestLines = url.split("\\r?\\n");
                 String[] requestLine = requestLines[0].split(" ");
                 String requestMethod = requestLine[0];
@@ -55,7 +45,6 @@ public class HTTPAsk {
 
                 if (!requestURI.startsWith("/ask?")) {
                     dataout.writeBytes(NotFound);
-                    continue;
                 }
                 
 
@@ -116,13 +105,13 @@ public class HTTPAsk {
                 //System.out.println("To server = "+BadRequest);
                 dataout.writeBytes(BadRequest);
             }
-        }   catch (Exception e){
+            }   catch (Exception e){
             System.err.println("Exception cast: " + e);
             } finally {
                 client.close();
             }
+        } catch (Exception e){
+            System.err.println("Exception cast: " + e);
         }
-        serverSocket.close();
-    }   
+    }     
 }
-
