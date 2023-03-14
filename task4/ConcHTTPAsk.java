@@ -5,7 +5,7 @@ import tcpclient.TCPClient;
 
 import java.io.*;
 
-public class HTTPAsk {
+public class ConcHTTPAsk {
     public static void main( String[] args) throws IOException {
         
         //Initializing all the variables
