@@ -75,7 +75,9 @@ public class MyRunnable implements Runnable {
                     
                     // Init TCPclient and responsearray
                     if (stringToSend != null){
-                        stringToBytes = (stringToSend+'\n').getBytes(StandardCharsets.UTF_8);
+                        stringToBytes = (stringToSend).getBytes(StandardCharsets.UTF_8); //+'\n'
+                    } else {
+                        stringToBytes = null;
                     }
                     try {
                         TCPClient tcpClient = new TCPClient(shutdown, timeout, limit);
