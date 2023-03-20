@@ -74,14 +74,15 @@ public class MyRunnable implements Runnable {
                     }
                     
                     // Init TCPclient and responsearray
-                    if (stringToSend != null){
-                        stringToBytes = (stringToSend).getBytes(StandardCharsets.UTF_8); //+'\n'
+                    if(stringToSend.equals(null) || stringToSend.equals("")){
+                        stringToBytes = new byte[0];
                     } else {
-                        stringToBytes = null;
+                        stringToBytes = (stringToSend+'\n').getBytes(StandardCharsets.UTF_8); //
                     }
                     try {
                         TCPClient tcpClient = new TCPClient(shutdown, timeout, limit);
                         //System.out.println("Client created");
+                        System.out.println("String2"+stringToSend+"Stringtosend");
                         byte[] response = tcpClient.askServer(hostname, Integer.parseInt(portNumber), stringToBytes);
                         //System.out.println(hostname+ Integer.parseInt(portNumber)+ Arrays.toString(stringToBytes));
                         String stringresponse = new String(response);

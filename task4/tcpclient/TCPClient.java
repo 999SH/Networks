@@ -31,6 +31,7 @@ public class TCPClient {
 
             Socket socket = new Socket(hostname, port);                         //Create the socket
             OutputStream outputStream = socket.getOutputStream();               //Creates the outputstream used to write data to a socket
+            System.out.println("Test"+toServerBytes.length+"Test2");
             outputStream.write(toServerBytes);                                  //Output toserverbytes array to server socket bytearray
             if (shutdown == true){
                 socket.shutdownOutput();          //Close outputstream if shutdown true 
